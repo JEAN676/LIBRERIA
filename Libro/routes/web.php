@@ -17,3 +17,14 @@ Route::get('/libros/detalles', function () {
 Route::get('/libros/descripcion', function () {
     return view('libros.Descripcion');
 });
+Route::get('/libros/historial', function () {
+    return view('libros.Historial');
+});
+
+Route::get('/libros/libros', function () {
+    return view('libros.Libros');
+});
+
+Route::get('/libros/busqueda', function () {
+    return view('libros.Busqueda');
+});
