@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LibroController;
 
 Route::get('/', function () {
     return view('libros.Main');
@@ -8,9 +9,15 @@ Route::get('/', function () {
 /*Route::get('/libros/main', function () {
     return view('libros.Main');
 });*/
-Route::get('/libros/registro', function () {
-    return view('libros.Registro');
-});
+
+Route::get('/libros/registro', [LibroController::class, 'create'])->name('libros.create');
+
+
+// Route::get('/libros/registro', function () {
+//     return view('libros.Registro');
+// });
+
+
 Route::get('/libros/detalles', function () {
     return view('libros.Detalles');
 });

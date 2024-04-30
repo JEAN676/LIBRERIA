@@ -14,7 +14,9 @@ class Libro extends Model
         'autor',
         'editorial',
         'anio_publicacion',
+        'descripcion',
         'imagen',
+
     ];
-    
+
 }
