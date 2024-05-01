@@ -19,6 +19,8 @@ Route::post('/libros/index',[LibroController::class,'store']);
 Route::get('/libros/{id}',[LibroController::class,'show']);
 Route::get('/libros/{id}/edit',[LibroController::class,'edit']);
 Route::put('/libros/{id}',[LibroController::class,'update']);
+Route::delete('/libros/{id}',[LibroController::class,'destroy']);
+Route::get('/libros/search',[LibroController::class,'search'])->name('libros.search');
 
 // Route::get('/libros/registro', function () {
 //     return view('libros.Registro');

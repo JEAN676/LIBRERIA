@@ -12,7 +12,7 @@
     <p><strong>Autor: </strong> {{$libro->anio_publicacion}}</p>
     <p><strong>Autor: </strong> {{$libro->descripcion}}</p>
     <a href="{{ url('/libros/'.$libro->id.'/edit')}}">Editar</a>
-    <form action="{{ url('/libro/'.$libro->id)}}" method="post"
+    <form action="{{ url('/libros/'.$libro->id)}}" method="post"
         style="display:inline">
     @csrf
     @method('DELETE')

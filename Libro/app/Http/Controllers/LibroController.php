@@ -38,19 +38,26 @@ class LibroController extends Controller
         return view('libros.edit',compact('libro'));
     }
     
-    public function update(Request $request,$id)
+    public function update(Request $resquest,$id)
     {
         $libro = Libro::findOrFail($id);
-        $libro->update($request->all());
+        $libro->update($resquest->all());
         return redirect('/libros/index');
     }
 
-    
-    // public function show($id){
-    //     $libro=Libro::findOrFail($id);
-    //     return view('libros.show',compact('libro'));
+    public function destroy($id)
+    {
+        $libro = Libro::findOrFail($id);
+        $libro->delete();
+        return redirect('/libros/index');
+    }
+        // FALTAN CORRECIONES PARA QUE FUNCIONE
+    // public function search(Request $resquest)
+    // {
+    //     $searchTerm = $resquest->input('titulo');
+    //     $libros = Libro::Where('titulo','LIKE','%'.$searchTerm.'%')->get();
+    //     return redirect()->route('libros.index');
     // }
-    
 }   
 
 // public function store1(Request $request)
