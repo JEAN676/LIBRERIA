@@ -20,17 +20,36 @@ class LibroController extends Controller
         return view('libros.create');
     }
 
-    public function show($id)
-    {
-    $libro = Libro::findOrFail($id);
-    return view('libros.Registro', compact('libro'));
-    }
-
     public function store(Request $request)
     {
         Libro::create($request->all());
         return redirect('/libros/index');
     }
+
+    public function show($id)
+    {
+        $libro = Libro::findOrFail($id);
+        return view('libros.show', compact('libro'));
+    }
+
+    public function edit($id)
+    {
+        $libro = Libro::findOrFail($id);
+        return view('libros.edit',compact('libro'));
+    }
+    
+    public function update(Request $request,$id)
+    {
+        $libro = Libro::findOrFail($id);
+        $libro->update($request->all());
+        return redirect('/libros/index');
+    }
+
+    
+    // public function show($id){
+    //     $libro=Libro::findOrFail($id);
+    //     return view('libros.show',compact('libro'));
+    // }
     
 }   
 
