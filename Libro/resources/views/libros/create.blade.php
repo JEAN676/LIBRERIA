@@ -5,7 +5,7 @@
     <div class="cabezera"><h2>Registro de Libro</h2></div>
     <div class="contenido">
         <div class="izquierda">
-            <form action="{{ route('libros.create') }}" method="POST">
+            <form action="{{ url('/libros') }}" method="POST">
                 @csrf
                 <div class="campo">
                     <label for="titulo">Título:</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="campo">
                     <label id="descri" for="descripcion">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                    <textarea id="descripcion" name="descripcion" rows="4"></textarea>
                 </div>
                 <div class="botones"><button type="submit">Registrar</button></div>
             </form>

@@ -9,9 +9,15 @@ class LibroController extends Controller
 {
     //
 
+    public function index()
+    {   
+        $libros=Libro::all();
+        return view('libros.index',compact('libros'));
+    }
+
     public function create()
     {
-        return view('libros.Registro');
+        return view('libros.create');
     }
 
     public function show($id)

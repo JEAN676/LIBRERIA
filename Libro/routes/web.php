@@ -12,6 +12,9 @@ Route::get('/', function () {
 
 Route::get('/libros/registro', [LibroController::class, 'create'])->name('libros.create');
 
+//  NUEVAS RUTAS
+Route::get('/libros/index',[LibroController::class,'index']);
+Route::get('/libros/create'.[LibroController::class,'create']);
 
 // Route::get('/libros/registro', function () {
 //     return view('libros.Registro');
