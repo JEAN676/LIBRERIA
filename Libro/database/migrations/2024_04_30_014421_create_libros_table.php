@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('editorial',50);
             $table->year('anio_publicacion');
             $table->text('descripcion');
-            $table->string('imagen')->nullable();
+            // $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

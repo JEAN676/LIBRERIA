@@ -5,7 +5,7 @@
     <div class="cabezera"><h2>Registro de Libro</h2></div>
     <div class="contenido">
         <div class="izquierda">
-            <form action="{{ url('/libros') }}" method="POST">
+            <form action="{{ url('/libros/index') }}" method="POST">
                 @csrf
                 <div class="campo">
                     <label for="titulo">Título:</label>
@@ -23,10 +23,10 @@
                     <label for="anio">Año de Publicación:</label>
                     <input type="number" id="anio" name="anio_publicacion" required>
                 </div>
-                <div class="campo">
+                {{-- <div class="campo">
                     <label for="imagen">Seleccionar Imagen:</label>
                     <input type="file" id="imagen" name="imagen" accept="image/*" required>
-                </div>
+                </div> --}}
                 <div class="campo">
                     <label id="descri" for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" rows="4"></textarea>

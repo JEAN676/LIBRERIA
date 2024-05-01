@@ -33,7 +33,8 @@
               <td>{{ $libro->titulo }}</td>
               <td>{{ $libro->autor }}</td>
               <td>{{ $libro->editorial }}</td>
-              <td>{{ $libro->descripcion}}</td>
+              <td>{{ $libro->anio_publicacion}}</td>
+              {{-- <td>{{ $libro->descripcion}}</td> --}}
               <td>
                   <a href="{{ url('/libros/'.$libro->id) }}">Ver</a>
                   <a href="{{ url('/libros/'.$libro->id.'/edit') }}">Editar</a>
