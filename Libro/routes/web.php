@@ -10,22 +10,25 @@ Route::get('/', function () {
     return view('libros.Main');
 });*/
 
-Route::get('/libros/registro', [LibroController::class, 'create'])->name('libros.create');
 
 //  NUEVAS RUTAS
-Route::get('/libros/index',[LibroController::class,'index']);
-Route::get('/libros/create',[LibroController::class,'create']);
-Route::post('/libros/index',[LibroController::class,'store']);
-Route::get('/libros/{id}',[LibroController::class,'show']);
-Route::get('/libros/{id}/edit',[LibroController::class,'edit']);
-Route::put('/libros/{id}',[LibroController::class,'update']);
-Route::delete('/libros/{id}',[LibroController::class,'destroy']);
-Route::get('/libros/search',[LibroController::class,'search'])->name('libros.search');
+Route::controller(LibroController::class)->group(function () {
+    Route::get('/libros/index','index');
+    Route::get('/libros/create','create');
+    Route::post('/libros/index','store');
+    Route::get('/libros/{id}','show');
+    Route::get('/libros/{id}/edit','edit');
+    Route::put('/libros/{id}','update');
+    Route::delete('/libros/{id}','destroy');
+    Route::get('/libros/search','search')->name('libros.search');
+});
+
 
 // Route::get('/libros/registro', function () {
-//     return view('libros.Registro');
-// });
-
+    //     return view('libros.Registro');
+    // });
+    
+    Route::get('/libros/registro', [LibroController::class, 'create'])->name('libros.create');
 
 Route::get('/libros/detalles', function () {
     return view('libros.Detalles');

@@ -3,8 +3,8 @@
 @section('content') 
 <div class="contenedor">
     <div class="cabezera"><h2>Registro de Libro</h2></div>
-    <div class="contenido">
-        <div class="izquierda">
+    <div id="min" class="contenido">
+        <div id="mins">
             <form action="{{ url('/libros/index') }}" method="POST">
                 @csrf
                 <div class="campo">

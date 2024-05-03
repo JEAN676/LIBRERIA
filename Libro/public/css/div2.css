@@ -69,12 +69,66 @@
     height: 100%;
     background-color: yellow;
 }
-#de{
-    background-image: url('/img/nebulosa.avif'); 
+/* #de{
     border-radius: 0px 0px 20px 0px;
     flex: 1;
     
+} */
+#de {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    /* background-image: url('/img/nebulosa.avif');  */
+
 }
+
+#de h5 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#de p {
+    margin: 8px 0;
+}
+#de .autor {
+    color: #ff0000; /* Cambia el color de la letra a rojo */
+}
+#de strong {
+    color: #0c0c0b;
+}
+
+#de a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#de a:hover {
+    background-color: #0056b3;
+}
+
+#de form button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#de form button:hover {
+    background-color: #c82333;
+}
+
+
 #todo {
     display: flex; /* Utiliza flexbox para organizar los elementos del formulario */
     flex-direction: column; /* Organiza los elementos en una columna */

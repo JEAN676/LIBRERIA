@@ -184,3 +184,80 @@
         height: 650px;
     }
 }
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Estilo para el título */
+h1 {
+    color: #333;
+}
+
+/* Estilo para el enlace de agregar libro */
+a {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Estilo para las celdas de la tabla */
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para las celdas de encabezado */
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Estilo para las filas impares */
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Estilo para los enlaces dentro de las celdas */
+td a {
+    margin-right: 5px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para el botón de eliminar */
+td form button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+td form button:hover {
+    background-color: #c82333;
+}

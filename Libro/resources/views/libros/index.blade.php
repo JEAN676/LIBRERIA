@@ -3,22 +3,7 @@
 @section('title', 'INDICE')
 
 @section('content')
-@if ($libros->isEmpty())
-    <p>No se encontraron resultados para la búsqueda.</p>
-@else
-    <!-- Mostrar la tabla de libros -->
-@endif
-{{-- falta habilitar su logica --}}
-<section class="busqueda">
-  <h2>Búsqueda</h2>
-  <form action="{{ route('libros.search')}}" method="GET">
-    @csrf
-    <label for="titulo">Título</label>
-    <input type="text" id="titulo" name="titulo">
-    <button type="submit">Buscar</button>
-  </form>
-</section>
-{{-- falta dar diseño --}}
+
 <section>
 <h1>Listado de Libros</h1>
 <a href="{{ url('/libros/create') }}">Agregar Libro</a>

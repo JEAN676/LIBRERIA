@@ -3,15 +3,15 @@ document.getElementById("caja1").addEventListener("click", function() {
 });
 
 document.getElementById("caja2").addEventListener("click", function() {
-    window.location.href = "/libros/busqueda";
+    window.location.href = "/libros/index";
 });
 
 document.getElementById("caja3").addEventListener("click", function() {
-    window.location.href = "/libros/registro";
+    window.location.href = "/libros/create";
 });
 
 document.getElementById("caja4").addEventListener("click", function() {
-    window.location.href = "/libros/detalles";
+    window.location.href = "/libros/libros";
 });
 
 document.getElementById("caja5").addEventListener("click", function() {

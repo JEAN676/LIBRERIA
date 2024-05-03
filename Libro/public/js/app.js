@@ -8,7 +8,7 @@ document.getElementById("caja3").addEventListener("click", function() {
     window.location.href = "/libros/create";
   });
 document.getElementById("caja4").addEventListener("click", function() {
-    window.location.href = "/libros/detalles";
+    window.location.href = "/libros/libros";
   });
 document.getElementById("caja5").addEventListener("click", function() {
     window.location.href = "/libros/historial";

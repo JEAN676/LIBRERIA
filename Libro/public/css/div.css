@@ -63,18 +63,41 @@ border-radius: 0px 0px 20px 0px;
     text-align: center;
 }
 
+#min{
+    display: flex;
+}
+
 .contenido {
     display: flex;
     justify-content: space-between;
 }
 
 .izquierda, .derecha {
+    display: flex;
     width: 50%; /* Se ajusta para dejar espacio para el margen entre ellos */
     height: 250px;
     text-align: center;
 }
 .izquierda{background-color: #b33852;}
 .derecha{background-color: #b33852;}
+#mins{
+    width: 100%; /* El div ocupará todo el ancho disponible */
+    height: 30vh; /* El div ocupará toda la altura visible del viewport */
+    background-color: #f0f0f0; /* Color de fondo para visualizar el área del div */
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+#mins form{
+    width: 80%; /* Ancho del formulario */
+    max-width: 400px; /* Ancho máximo para mantener la legibilidad */
+    padding: 20px;
+    background-color: #fff; /* Color de fondo del formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
 .observaciones, .botones {
     text-align: center;
 }
