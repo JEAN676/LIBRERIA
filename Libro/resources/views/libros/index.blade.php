@@ -5,7 +5,7 @@
 @section('content')
 
 <section>
-<h1>Listado de Libros1234</h1>
+<h1>Listado de Libros12345</h1>
 <a href="{{ url('/libros/create') }}">Agregar Libro</a>
 <table > 
   <thead>
