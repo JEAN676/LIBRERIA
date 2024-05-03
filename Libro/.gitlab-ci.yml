@@ -5,7 +5,7 @@ stages:
 test-job:
   stage: pruebas
   script:
-   - cd ~/public_html
+   - cd ~/public_html/Libros
    - git pull origin main
    - php artisan migrate:fresh
    - php artisan test
@@ -16,7 +16,7 @@ test-job:
 deploy-job:
   stage: despliegue
   script:
-   - cd ~/public_html
+   - cd ~/public_html/Libros
    - git pull origin main
    - sh ~/permisos.sh
   tags:
