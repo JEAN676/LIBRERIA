@@ -23,6 +23,7 @@ Route::controller(LibroController::class)->group(function () {
     Route::get('/libros/search','search')->name('libros.search');
 });
 
+Route::get('/main',function() {return view('layouts.main');});
 
 // Route::get('/libros/registro', function () {
     //     return view('libros.Registro');
