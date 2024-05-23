@@ -9,5 +9,5 @@ class Historial extends Model
 {
 
 
-    
+    "sasad"
 }
