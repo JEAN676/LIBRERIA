@@ -1,7 +1,0 @@
-1_ main ->  es la  principal
-2_ busqueda -> muestra la lista de los libros de la base de datos
-3_ registro -> se agrega un libro a la base de datos
-4_ detalles -> para ver un elemento del libro
-5_ historial -> se debe reazer, solo debe mostrar el el proxeso que ser realizo
-6_ descripcion -> no posee una ruta que la dirija, edita un elemento de la lista 
-7_ libros -> no tiene sentido, muestra los libros, se parece a busqueda
