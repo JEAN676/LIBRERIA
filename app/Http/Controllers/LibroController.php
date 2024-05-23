@@ -64,22 +64,28 @@ class LibroController extends Controller
             'idioma' => 'nullable|string|max:50',
             'descripcion' => 'nullable|string',
         ]);
-
-        DB::beginTransaction();
-
-        try {
-
-        $libro = Libro::create($request->all());
-
-        DB::commit();
-
-        return redirect()->route('historiales.create', ['libro_id' => $libro->id])->with('msn_succes','Libro creado correctamente');
     
+        DB::beginTransaction();
+    
+        try {
+            // Crear un registro de libro
+            $libro = Libro::create($request->all());
+    
+            // Crear un registro en el historial con la acción de agregar
+            Historial::create([
+                'libro_id' => $libro->id,
+                'accion' => 'agregar',
+                'descripcion' => 'Agregado nuevo libro: ' . $libro->titulo,
+            ]);
+    
+            DB::commit();
+    
+            // Redireccionar a la vista principal
+            return redirect()->route('main')->with('success', 'Libro creado correctamente');
         } catch (\Exception $e) {
             LogHelper::logError($this, $e);
             DB::rollBack();
-            return redirect()->back()->with('msn_error','Fallo la creacion del libro'. $e->getMessage());
-            // withErrors(['error' => 'Error al crear el libro: ' . $e->getMessage()])
+            return redirect()->back()->with('error', 'Fallo la creación del libro: ' . $e->getMessage());
         }
     }
 
@@ -139,24 +145,55 @@ class LibroController extends Controller
     // Elimina un libro específico
     public function destroy($id)
     {   
+        // // dd("Llega al controlador");
+        // // dd($id);
+        // DB::beginTransaction();
+
+        // try {
+        // $libro = Libro::findOrFail($id);
+        // $lib_id = $libro->id;
+        // // dd($libro);
+        // $libro->delete();
+        // // dd("Registro eliminado");    
+        // // Registrar en el historial
+        // $historial = Historial::create([
+        //     'libro_id' => $lib_id,
+        //     'accion' => 'eliminacion',
+        //     'descripcion' => 'Eliminación de libro'
+        // ]);
+        // dd($historial);
+        // // dd("Historial registrado");
+        // DB::commit();
+        // return redirect()->route('libros.index')->with('msn_success', 'Libro eliminado correctamente.');
+        // } catch (\Exception $e) {
+        //     LogHelper::logError($this, $e);
+        // DB::rollBack();
+        // dd($e->getMessage());
+        // return redirect()->back()->with('msn_error', 'Error al eliminar el libro: ' . $e->getMessage());
+        // }
         DB::beginTransaction();
 
         try {
-        $libro = Libro::findOrFail($id);
-        $libro->delete();
-
-        // Registrar en el historial
-        Historial::create([
-            'libro_id' => $libro->id,
-            'accion' => 'eliminar',
-            'descripcion' => 'Eliminación de libro'
-        ]);
-        DB::commit();
-        return redirect()->route('libros.index')->with('msn_success', 'Libro eliminado correctamente.');
+            $libro = Libro::findOrFail($id);
+            $libro_id = $libro->id;
+    
+            // Crear historial antes de eliminar el libro
+            Historial::create([
+                'libro_id' => $libro_id,
+                'accion' => 'eliminacion',
+                'descripcion' => 'Eliminación de libro'
+            ]);
+    
+            // Eliminar el libro después de crear el historial
+            $libro->delete();
+    
+            DB::commit();
+            return redirect()->route('libros.index')->with('msn_success', 'Libro eliminado correctamente.');
         } catch (\Exception $e) {
             LogHelper::logError($this, $e);
-        DB::rollBack();
-        return redirect()->back()->with('msn_error', 'Error al eliminar el libro: ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('msn_error', 'Error al eliminar el libro: ' . $e->getMessage());
         }
+
     }      
 }
