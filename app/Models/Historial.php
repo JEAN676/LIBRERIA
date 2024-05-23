@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Historial extends Model
 {
+    use HasFactory;
 
+    protected $fillable = [
+        'libro_id',
+        'accion',
+        'descripcion',
+    ];
 
-    "sasad"
+    public function libro()
+    {
+        return $this->belongsTo(Libro::class);
+    }
 }
