@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title','Edit')
 @section('content')
-<h1>Editar Libro</h1>
+<h1>Actualizar Libro</h1>
 
 @if ($errors->any())
     <div class="alert alert-danger">
