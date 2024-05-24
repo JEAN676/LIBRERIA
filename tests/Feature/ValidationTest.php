@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Mockery;
 
 
+
 class ValidationTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,14 +19,6 @@ class ValidationTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-
     /** @test */
     public function puede_ver_formulario_para_crear_un_libro()
     {
@@ -35,81 +28,34 @@ class ValidationTest extends TestCase
         $response->assertViewIs('libros.create');
     }
 
-    public function puede_crear_un_libro()
+
+    public function test_historial_store_validation(): void
     {
-        $data = [
-            'titulo' => 'El Gran Gatsby',
-            'autor' => 'F. Scott Fitzgerald',
-            'anio_publicacion' => 1925,
+        $invalidData = [
+            'libro_id' => null,
+            'accion' => '',
         ];
 
-        $response = $this->post('/libros/index', $data);
+        $response = $this->post(route('historiales.store'), $invalidData);
 
-        $response->assertRedirect('/libros/index');
-        $this->assertDatabaseHas('libros', $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['libro_id', 'accion']);
     }
 
-    /** @test */
-    public function requiere_titulo_para_crear_un_libro()
+    public function test_libro_store_validation(): void
     {
-        $response = $this->post('/libros/index', []);
+        $invalidData = [
+            'titulo' => '',
+            'autor' => '',
+            'ISBN' => '',
+            'editorial' => '',
+            'num_paginas' => null,
+            'genero' => '',
+        ];
 
-        $response->assertSessionHasErrors('titulo');
+        $response = $this->post(route('libros.store'), $invalidData);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['titulo', 'autor', 'ISBN', 'editorial', 'num_paginas', 'genero']);
     }
-
-    /** @test */
-    public function requiere_autor_para_crear_un_libro()
-    {
-        $response = $this->post('/libros/index', []);
-
-        $response->assertSessionHasErrors('autor');
-    }
-
-    /** @test */
-    public function requiere_anio_publicacion_para_crear_un_libro()
-    {
-        $response = $this->post('/libros/index', []);
-
-        $response->assertSessionHasErrors('anio_publicacion');
-    }
-// /** @test */
-// /** @test */
-// public function puede_actualizar_un_libro()
-// {
-//     // Crear un mock para el modelo Libro
-//     $libroMock = Mockery::mock(Libro::class);
-//     $libroMock->shouldReceive('update')->atLeast()->once()->andReturn(true);
-
-//     // Usar el mock en lugar del modelo real
-//     $this->app->instance(Libro::class, $libroMock);
-
-//     // Enviar una solicitud PUT para actualizar el libro
-//     $response = $this->put("/libros/1", []);
-
-//     // Verificar que el método 'update' se llame al menos una vez
-//     $libroMock->shouldHaveReceived('update')->atLeast()->once();
-
-//     // Verificar que la respuesta sea una redirección
-//     $response->assertRedirect();
-// }
-
-// /** @test */
-// public function puede_eliminar_un_libro()
-// {
-//     // Crear un mock para el modelo Libro
-//     $libroMock = Mockery::mock(Libro::class);
-//     $libroMock->shouldReceive('delete')->atLeast()->once()->andReturn(true);
-
-//     // Usar el mock en lugar del modelo real
-//     $this->app->instance(Libro::class, $libroMock);
-
-//     // Enviar una solicitud DELETE para eliminar el libro
-//     $response = $this->delete("/libros/1");
-
-//     // Verificar que el método 'delete' se llame al menos una vez
-//     $libroMock->shouldHaveReceived('delete')->atLeast()->once();
-
-//     // Verificar que la respuesta sea una redirección
-//     $response->assertRedirect();
-// }
 }
