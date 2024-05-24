@@ -20,28 +20,28 @@
           <span class="tooltip">Search</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('libros.create') }}">
             <i class="bx bx-grid-alt"></i>
-            <span class="link_name">Dashboard</span>
+            <span class="link_name">Crear</span>
           </a>
-          <span class="tooltip">Dashboard</span>
+          <span class="tooltip">Crear</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('libros.index') }}">
             <i class="bx bx-user"></i>
-            <span class="link_name">User</span>
+            <span class="link_name">Inventario</span>
           </a>
-          <span class="tooltip">User</span>
+          <span class="tooltip">Inventario</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('historiales.index') }}">
             <i class="bx bx-chat"></i>
-            <span class="link_name">Message</span>
+            <span class="link_name">Historial</span>
           </a>
-          <span class="tooltip">Message</span>
+          <span class="tooltip">Historial</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('main') }}">
             <i class="bx bx-pie-chart-alt-2"></i>
             <span class="link_name">Analytics</span>
           </a>
@@ -50,9 +50,9 @@
         <li>
           <a href="#">
             <i class="bx bx-folder"></i>
-            <span class="link_name">File Manger</span>
+            <span class="link_name">Archivos</span>
           </a>
-          <span class="tooltip">File Manger</span>
+          <span class="tooltip">Archivos</span>
         </li>
         <li>
           <a href="#">
@@ -61,13 +61,7 @@
           </a>
           <span class="tooltip">Order</span>
         </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-cog"></i>
-            <span class="link_name">Settings</span>
-          </a>
-          <span class="tooltip">Settings</span>
-        </li>
+        
         <li class="profile">
           <div class="profile_details">
             <img src="{{ asset('img/fondo_bosque.jpg') }}" alt="profile image">

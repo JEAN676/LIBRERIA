@@ -22,6 +22,7 @@ class HistorialController extends Controller
     public function create(Request $request)
     {
         $libro_id = $request->input('libro_id');
+        $libros = Libro::all();
         return view('historiales.create', compact('libro_id'));
     }
 
