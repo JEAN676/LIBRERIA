@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('historial', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('libro_id')->constrained('libros'); //->onDelete('cascade')
-            $table->enum('accion',['agregar','actualizar','eliminacion']);
+            $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
+            $table->enum('accion',['agregar','actualizar','eliminación']);
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });
