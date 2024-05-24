@@ -5,22 +5,22 @@ stages:
 test-job:
   stage: pruebas
   script:
-   - cd ~/public_html/Libro
+   - cd ~/public_html
    - git pull origin main
    - php artisan migrate:fresh
    - php artisan test
    #- php artisan dusk
   tags:
-   - alexander
+   - seminario
 
 deploy-job:
   stage: despliegue
   script:
-   - cd ~/public_html/Libro
+   - cd ~/public_html
    - git pull origin main
    - sh ~/permisos.sh
   tags:
-   - alexander
+   - seminario
    
    
 
