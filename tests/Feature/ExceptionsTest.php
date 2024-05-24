@@ -5,18 +5,58 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Libro;
 
 class ExceptionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_show_nonexistent(): void
+    public function test_historial_store_exception(): void
     {
-        // Simula mostrar un libro que no existe.
-        $response = $this->get('/libros/show/1000'); // Suponiendo que 1000 es un ID inexistente.
-        $response->assertStatus(404);
-        // Verifica que se reciba una respuesta 404 Not Found.
+        $libro = Libro::factory()->create();
+
+        $historialData = [
+            'libro_id' => $libro->id,
+            'accion' => str_repeat('a', 256),
+        ];
+
+        $response = $this->post(route('historiales.store'), $historialData);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
     }
 
-    // Repite este patrón para cada acción del controlador que pueda generar excepciones.
+    public function test_historial_show_nonexistent_exception(): void
+    {
+        $response = $this->get(route('historiales.show', 999));
+
+        $response->assertStatus(404);
+    }
+
+    public function test_libro_store_exception(): void
+    {
+        $libroData = [
+            'titulo' => str_repeat('a', 256),
+            'autor' => 'Autor de ejemplo',
+            'ISBN' => '1234567890',
+            'editorial' => 'Editorial de ejemplo',
+            'anio_publicacion' => 2023,
+            'genero' => 'Ficción',
+            'num_paginas' => 300,
+            'idioma' => 'Español',
+            'descripcion' => 'Descripción del libro de ejemplo',
+        ];
+
+        $response = $this->post(route('libros.store'), $libroData);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
+    }
+
+    public function test_libro_show_nonexistent_exception(): void
+    {
+        $response = $this->get(route('libros.show', 999));
+
+        $response->assertStatus(404);
+    }
 }
