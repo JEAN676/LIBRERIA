@@ -22,14 +22,14 @@
         </li>
         <li>
           <a href="{{ route('libros.create') }}">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-user"></i>
             <span class="link_name">Crear</span>
           </a>
           <span class="tooltip">Crear</span>
         </li>
         <li>
           <a href="{{ route('libros.index') }}">
-            <i class="bx bx-user"></i>
+            <i class="bx bx-grid-alt"></i>
             <span class="link_name">Inventario</span>
           </a>
           <span class="tooltip">Inventario</span>
@@ -76,7 +76,7 @@
       </ul>
     </div>
   <section class="home-section">
-    <div class="text">Dashboard </div>
+    {{-- <div class="text">Biblioteca </div> --}}
     @yield('content')
 
   </section>
