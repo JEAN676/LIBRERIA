@@ -24,10 +24,10 @@
                         <td>
                             <a href="{{ route('libros.show', ['id' => $libro->id]) }}" class="btn btn-info">Ver</a>
                             <a href="{{ route('libros.edit', ['id' => $libro->id]) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('libros.destroy', ['id' => $libro->id]) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('libros.destroy', ['id' => $libro->id]) }}" method="POST" style="display: inline;" onsubmit="confirmaEliminarEquipo(event)">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?')">Eliminar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
                         </td>
                     </tr>

@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-// use Illuminate\Database\QueryException; 
 use Illuminate\Database\QueryException;
-use Exception;  
-// use Illuminate\Foundation\Exceptions\Exception;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Utils\LogHelper;
@@ -81,11 +79,11 @@ class LibroController extends Controller
             DB::commit();
     
             // Redireccionar a la vista principal
-            return redirect()->route('main')->with('success', 'Libro creado correctamente');
+            return redirect()->route('main')->with('msn_success', 'Libro creado correctamente');
         } catch (\Exception $e) {
             LogHelper::logError($this, $e);
             DB::rollBack();
-            return redirect()->back()->with('error', 'Fallo la creación del libro: ' . $e->getMessage());
+            return redirect()->back()->with('msn_error', 'Fallo la creación del libro: ' . $e->getMessage());
         }
     }
 
@@ -134,43 +132,17 @@ class LibroController extends Controller
 
         DB::commit();
 
-        return redirect()->route('libros.index')->with('success', 'Libro actualizado correctamente.');
+        return redirect()->route('libros.index')->with('msn_success', 'Libro actualizado correctamente.');
         } catch (\Exception $e) {
             LogHelper::logError($this, $e);
             DB::rollBack();
-            return redirect()->back()->with('error', 'Error al actualizar el libro: '. $e->getMessage());
+            return redirect()->back()->with('msn_error', 'Error al actualizar el libro: '. $e->getMessage());
         }
     }
 
     // Elimina un libro específico
     public function destroy($id)
     {   
-        // // dd("Llega al controlador");
-        // // dd($id);
-        // DB::beginTransaction();
-
-        // try {
-        // $libro = Libro::findOrFail($id);
-        // $lib_id = $libro->id;
-        // // dd($libro);
-        // $libro->delete();
-        // // dd("Registro eliminado");    
-        // // Registrar en el historial
-        // $historial = Historial::create([
-        //     'libro_id' => $lib_id,
-        //     'accion' => 'eliminacion',
-        //     'descripcion' => 'Eliminación de libro'
-        // ]);
-        // dd($historial);
-        // // dd("Historial registrado");
-        // DB::commit();
-        // return redirect()->route('libros.index')->with('msn_success', 'Libro eliminado correctamente.');
-        // } catch (\Exception $e) {
-        //     LogHelper::logError($this, $e);
-        // DB::rollBack();
-        // dd($e->getMessage());
-        // return redirect()->back()->with('msn_error', 'Error al eliminar el libro: ' . $e->getMessage());
-        // }
         DB::beginTransaction();
 
         try {
@@ -194,6 +166,5 @@ class LibroController extends Controller
             DB::rollBack();
             return redirect()->back()->with('msn_error', 'Error al eliminar el libro: ' . $e->getMessage());
         }
-
     }      
 }

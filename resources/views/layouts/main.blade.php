@@ -22,14 +22,14 @@
         </li>
         <li>
           <a href="{{ route('libros.create') }}">
-            <i class="bx bx-user"></i>
+            <i class="bx bx-grid-alt"></i>
             <span class="link_name">Crear</span>
           </a>
           <span class="tooltip">Crear</span>
         </li>
         <li>
           <a href="{{ route('libros.index') }}">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-user"></i>
             <span class="link_name">Inventario</span>
           </a>
           <span class="tooltip">Inventario</span>
@@ -76,11 +76,54 @@
       </ul>
     </div>
   <section class="home-section">
-    {{-- <div class="text">Biblioteca </div> --}}
+    <div class="text">Dashboard </div>
     @yield('content')
-
   </section>
+  
   <!-- Scripts -->
   <script src="{{ asset('js/main.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');
+        
+        @if(session('msn_success'))
+            console.log('msn_success:', '{{ session('msn_success') }}');
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '{{ session('msn_success') }}',
+            });
+        @endif
+        
+        @if(session('msn_error'))
+            console.log('msn_error:', '{{ session('msn_error') }}');
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: '{{ session('msn_error') }}',
+            });
+        @endif
+    });
+
+    function confirmaEliminarEquipo(event) {
+        event.preventDefault();
+        let form = event.target;
+        Swal.fire({
+            text: "¿Estás seguro de que deseas eliminar este equipo?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí",
+            cancelButtonText: "No"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    }
+  </script>
 </body>
 </html>

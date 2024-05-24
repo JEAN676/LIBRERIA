@@ -84,7 +84,7 @@ class SuccessTest extends TestCase
         $response->assertRedirect(route('main'));
     
         // Verificar que el mensaje de éxito esté en la sesión
-        $response->assertSessionHas('success', 'Libro creado correctamente');
+        $response->assertSessionHas('msn_success', 'Libro creado correctamente');
     
         // Verificar que el libro esté en la base de datos
         $this->assertDatabaseHas('libros', $libroData);
