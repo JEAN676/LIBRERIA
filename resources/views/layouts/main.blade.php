@@ -76,7 +76,7 @@
       </ul>
     </div>
   <section class="home-section">
-    <div class="text">Dashboard </div>
+    <div class="text">Biblioteca</div>
     @yield('content')
   </section>
   
