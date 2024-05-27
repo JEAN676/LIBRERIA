@@ -16,20 +16,25 @@
       </div>
       <ul class="nav-list">
         <li>
-          <i class="bx bx-search"></i>
-          <input type="text" placeholder="Search...">
-          <span class="tooltip">Search</span>
+          <form method="GET" action="{{ route('libros.index') }}" style="display: flex; align-items: center;">
+            <i class="bx bx-search"></i>
+            <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+            <span class="tooltip">Search</span>
+        </form>
+          {{-- <i class="bx bx-search"></i>
+          <input type="text" placeholder="Search..."> --}}
+          {{-- <span class="tooltip">Search</span> --}}
         </li>
         <li>
           <a href="{{ route('libros.create') }}">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-user"></i>
             <span class="link_name">Crear</span>
           </a>
           <span class="tooltip">Crear</span>
         </li>
         <li>
           <a href="{{ route('libros.index') }}">
-            <i class="bx bx-user"></i>
+            <i class="bx bx-grid-alt"></i>
             <span class="link_name">Inventario</span>
           </a>
           <span class="tooltip">Inventario</span>
@@ -51,9 +56,9 @@
         <li>
           <a href="#">
             <i class="bx bx-folder"></i>
-            <span class="link_name">Archivos</span>
+            <span class="link_name">Catalogo</span>
           </a>
-          <span class="tooltip">Archivos</span>
+          <span class="tooltip">Catalogo</span>
         </li>
         <li>
           <a href="#">
@@ -76,7 +81,7 @@
       </ul>
     </div>
   <section class="home-section">
-    <div class="text">Biblioteca</div>
+    {{-- <div class="text">Biblioteca</div> --}}
     @yield('content')
   </section>
   

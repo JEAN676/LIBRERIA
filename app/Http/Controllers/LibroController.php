@@ -36,10 +36,27 @@ class LibroController extends Controller
     }
 
     // Muestra todos los libros
-    public function index()
+    public function index(Request $request)
     {
-        $libros = Libro::all();
+        // Obtener el parámetro de búsqueda
+        $search = $request->input('search');
+
+        // Construir la consulta
+        $query = Libro::query();
+
+        if ($search) {
+            $query->where('titulo', 'like', '%' . $search . '%')
+                  ->orWhere('autor', 'like', '%' . $search . '%')
+                  ->orWhere('ISBN', 'like', '%' . $search . '%'); // Suponiendo que ISBN es el DNI
+        }
+
+        // Ejecutar la consulta y obtener los resultados
+        $libros = $query->get();
+
+        // Pasar los resultados a la vista
         return view('libros.index', compact('libros'));
+        // $libros = Libro::all();
+        // return view('libros.index', compact('libros'));
     }
 
     // Muestra el formulario para crear un nuevo libro

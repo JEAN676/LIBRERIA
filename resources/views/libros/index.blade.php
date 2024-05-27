@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="mb-4">Todos los Libros</h1>
 
-        <a href="{{ route('libros.create') }}" class="btn btn-primary mb-4">Registrar Nuevo Libro</a>
+        {{-- <a href="{{ route('libros.create') }}" class="btn btn-primary mb-4">Registrar Nuevo Libro</a> --}}
 
         <table class="table">
             <thead>
