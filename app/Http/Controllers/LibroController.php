@@ -69,15 +69,15 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required|string|max:50',
-            'autor' => 'required|string|max:50',
-            'ISBN' => 'required|string|unique:libros,ISBN',
-            'editorial' => 'required|string|max:50',
-            'anio_publicacion' => 'nullable|numeric',
+            'titulo' => 'required|string|max:30',
+            'autor' => 'required|string|max:20',
+            'ISBN' => 'required|string|unique:libros,ISBN|max:13',
+            'editorial' => 'required|string|max:20',
+            'anio_publicacion' => 'nullable|numeric|between:1901,2155',
             'genero' => 'required|string',
             'num_paginas' => 'required|numeric',
-            'idioma' => 'nullable|string|max:50',
-            'descripcion' => 'nullable|string',
+            'idioma' => 'nullable|string|max:10',
+            'descripcion' => 'nullable|string|max:150',
         ]);
     
         DB::beginTransaction();
