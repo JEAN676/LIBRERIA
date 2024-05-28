@@ -34,5 +34,26 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+          <div class="pagination">
+            <ul>
+                @if ($libros->onFirstPage())
+                    <li class="disabled"><span>&laquo;</span></li>
+                @else
+                    <li><a href="{{ $libros->previousPageUrl() }}">&laquo;</a></li>
+                @endif
+                
+                @foreach (range(1, $libros->lastPage()) as $i)
+                    <li class="{{ ($libros->currentPage() == $i) ? 'active' : '' }}">
+                        <a href="{{ $libros->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endforeach
+        
+                @if ($libros->hasMorePages())
+                    <li><a href="{{ $libros->nextPageUrl() }}">&raquo;</a></li>
+                @else
+                    <li class="disabled"><span>&raquo;</span></li>
+                @endif
+            </ul>
+        </div>
+        </div>
 @endsection

@@ -12,9 +12,18 @@ use App\Utils\LogHelper;
 class HistorialController extends Controller
 {
     // Muestra todos los registros de historial
-    public function index()
-    {
-        $historiales = Historial::with('libro')->get();
+    public function index(Request $request)
+    {   
+        $search = $request->input('search');
+        $query = Historial::query();
+        if ($search) {
+            $query->where('libro_id', 'like', '%' . $search . '%')
+                  ->orWhere('accion', 'like', '%' . $search . '%'); 
+        }
+        // $historiales = $query->paginate(3);
+
+        // $historiales = Historial::with('libro')->get();
+        $historiales = $query->with('libro')->paginate(3);
         return view('historiales.index', compact('historiales'));
     }
 

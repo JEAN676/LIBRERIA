@@ -47,11 +47,12 @@ class LibroController extends Controller
         if ($search) {
             $query->where('titulo', 'like', '%' . $search . '%')
                   ->orWhere('autor', 'like', '%' . $search . '%')
-                  ->orWhere('ISBN', 'like', '%' . $search . '%'); // Suponiendo que ISBN es el DNI
+                  ->orWhere('ISBN', 'like', '%' . $search . '%'); 
         }
 
         // Ejecutar la consulta y obtener los resultados
-        $libros = $query->get();
+        // $libros = $query->get();
+        $libros = $query->paginate(3);
 
         // Pasar los resultados a la vista
         return view('libros.index', compact('libros'));
@@ -71,11 +72,11 @@ class LibroController extends Controller
         $request->validate([
             'titulo' => 'required|string|max:30',
             'autor' => 'required|string|max:20',
-            'ISBN' => 'required|string|unique:libros,ISBN|max:13',
+            'ISBN' => 'required|string|unique:libros,ISBN|between:10,13',
             'editorial' => 'required|string|max:20',
             'anio_publicacion' => 'nullable|numeric|between:1901,2155',
             'genero' => 'required|string',
-            'num_paginas' => 'required|numeric',
+            'num_paginas' => 'required|numeric|min:1|max:600',
             'idioma' => 'nullable|string|max:10',
             'descripcion' => 'nullable|string|max:150',
         ]);

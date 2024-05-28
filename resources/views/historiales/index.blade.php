@@ -30,5 +30,26 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="pagination">
+            <ul>
+                @if ($historiales->onFirstPage())
+                    <li class="disabled"><span>&laquo;</span></li>
+                @else
+                    <li><a href="{{ $historiales->previousPageUrl() }}">&laquo;</a></li>
+                @endif
+                
+                @foreach (range(1, $historiales->lastPage()) as $i)
+                    <li class="{{ ($historiales->currentPage() == $i) ? 'active' : '' }}">
+                        <a href="{{ $historiales->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endforeach
+        
+                @if ($historiales->hasMorePages())
+                    <li><a href="{{ $historiales->nextPageUrl() }}">&raquo;</a></li>
+                @else
+                    <li class="disabled"><span>&raquo;</span></li>
+                @endif
+            </ul>
+        </div>
     </div>
 @endsection

@@ -31,7 +31,7 @@
             </div>
             <div class="mb-3">
                 <label for="ISBN" class="form-label">ISBN</label>
-                <input type="number" class="form-control" id="ISBN" name="ISBN" value="{{ old('ISBN') }}" required>
+                <input type="text" class="form-control" id="ISBN" name="ISBN" value="{{ old('ISBN') }}" required>
             </div>
             <div class="mb-3">
                 <label for="editorial" class="form-label">Editorial</label>
