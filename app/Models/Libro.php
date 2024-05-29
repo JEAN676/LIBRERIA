@@ -20,4 +20,9 @@ class Libro extends Model
         'idioma',
         'descripcion',
     ];
+
+    public function archivo()
+    {
+        return $this->hasOne(Archivo::class);
+    }
 }

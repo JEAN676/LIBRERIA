@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
+            $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade')->unique();
             $table->string('imagen_path');
             $table->string('pdf_path');
             $table->timestamps();

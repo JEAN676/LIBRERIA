@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\HistorialController;
+use App\Http\Controllers\ArchivoController;
 use App\Models\Libro;
 
 Route::controller(LibroController::class, 'libros')->group(function (){
@@ -24,3 +25,4 @@ Route::controller(HistorialController::class,'historiales')->group(function (){
     Route::get('/historiales/{id}','show')->name('historiales.show'); // Detalles de un historial
 });
 
+Route::get('/catalogo', [ArchivoController::class, 'index'])->name('archivos.index');

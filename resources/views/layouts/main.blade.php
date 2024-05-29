@@ -54,7 +54,7 @@
           <span class="tooltip">Analytics</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('archivos.index')}}">
             <i class="bx bx-folder"></i>
             <span class="link_name">Catalogo</span>
           </a>

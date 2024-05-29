@@ -19,4 +19,5 @@ class Archivo extends Model
     {
         return $this->belongsTo(Libro::class);
     }
+    
 }
