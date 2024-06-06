@@ -15,5 +15,6 @@
         </div>
 
         <a href="{{ route('historiales.index') }}" class="btn btn-secondary mt-3">Volver al Historial</a>
+        <a href="{{ route('historiales.downloadPDF', $historial->id) }}" class="btn btn-primary mt-3">Download PDF</a>
     </div>
 @endsection

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\ArchivoController;
-use App\Models\Libro;
 
 Route::controller(LibroController::class, 'libros')->group(function (){
     Route::get('/','main')->name('main'); // Vista principal
@@ -23,6 +22,10 @@ Route::controller(HistorialController::class,'historiales')->group(function (){
     Route::get('/historiales/create','create')->name('historiales.create'); // Formulario de creación de historial
     Route::post('/historiales','store')->name('historiales.store'); // Almacenar nuevo historial
     Route::get('/historiales/{id}','show')->name('historiales.show'); // Detalles de un historial
+    Route::get('/historiales/{id}/download','downloadPDF')->name('historiales.pdf');
 });
 
-Route::get('/catalogo', [ArchivoController::class, 'index'])->name('archivos.index');
+Route::controller(ArchivoController::class,'archivos')->group(function(){
+    Route::get('/catalogo', 'index')->name('archivos.index');
+    Route::get('/libros/{id}/pdf','showPdf')->name('libros.pdf');    
+});

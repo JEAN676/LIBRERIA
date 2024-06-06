@@ -13,9 +13,23 @@ class SuccessTest extends TestCase
     /**
      * A basic feature test example.
      */
+    use RefreshDatabase;
     public function test_historial_store_success(): void
-    {
-        $libro = Libro::factory()->create();
+    { 
+        $libro = Libro::create(
+            [
+                    'titulo' => 'Ad enim eveniet est qui.',
+        'autor' => 'Clair Frami',
+        'ISBN' => '9791136608222',
+        'editorial' => 'Grant, Dibbert', // Campo acortado
+        'anio_publicacion' => '1985',
+        'genero' => 'id',
+        'num_paginas' => 897,
+        'idioma' => 'id',
+        'descripcion' => 'Quo qui optio pariatur qui ea occaecati sit. Itaque libero officia provident mollitia corrupti.',
+                 
+            ]
+        );
 
         $historialData = [
             'libro_id' => $libro->id,
@@ -43,7 +57,20 @@ class SuccessTest extends TestCase
     public function test_historial_show_success()
     {
         // Crear un libro para asociarlo con el historial
-        $libro = Libro::factory()->create();
+        $libro = Libro::create(
+            [
+                    'titulo' => 'Ad enim eveniet est qui.',
+        'autor' => 'Clair Frami',
+        'ISBN' => '9791136608222',
+        'editorial' => 'Grant, Dibbert', // Campo acortado
+        'anio_publicacion' => '1985',
+        'genero' => 'id',
+        'num_paginas' => 897,
+        'idioma' => 'id',
+        'descripcion' => 'Quo qui optio pariatur qui ea occaecati sit. Itaque libero officia provident mollitia corrupti.',
+                 
+            ]
+        );
     
         // Crear un historial con un valor permitido en el enum 'accion'
         $historial = Historial::create([
@@ -99,10 +126,23 @@ class SuccessTest extends TestCase
 
     public function test_libro_show_success(): void
     {
-        $libro = Libro::factory()->create();
-
+        $libro = Libro::create(
+            [
+                    'titulo' => 'Ad enim eveniet est qui.',
+        'autor' => 'Clair Frami',
+        'ISBN' => '9791136608222',
+        'editorial' => 'Grant, Dibbert', // Campo acortado
+        'anio_publicacion' => '1985',
+        'genero' => 'id',
+        'num_paginas' => 897,
+        'idioma' => 'id',
+        'descripcion' => 'Quo qui optio pariatur qui ea occaecati sit. Itaque libero officia provident mollitia corrupti.',
+                 
+            ]
+        );
+ 
         $response = $this->get(route('libros.show', $libro->id));
-
+ 
         $response->assertStatus(200);
         $response->assertViewIs('libros.show');
         $response->assertViewHas('libro', $libro);

@@ -7,6 +7,7 @@ use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Utils\LogHelper;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class HistorialController extends Controller
@@ -18,7 +19,10 @@ class HistorialController extends Controller
         $query = Historial::query();
         if ($search) {
             $query->where('libro_id', 'like', '%' . $search . '%')
-                  ->orWhere('accion', 'like', '%' . $search . '%'); 
+                  ->orWhere('accion', 'like', '%' . $search . '%')
+                  ->orWhereHas('libro', function ($query) use ($search) {
+                        $query->where('titulo', 'like', '%' . $search . '%');
+                    }); 
         }
         // $historiales = $query->paginate(3);
 
@@ -65,5 +69,13 @@ class HistorialController extends Controller
     {
         $historial = Historial::with('libro')->findOrFail($id);
         return view('historiales.show', compact('historial'));
+    }
+
+    public function downloadPDF($id)
+    {
+        $historial = Historial::with('libro')->findOrFail($id);
+        $pdf = Pdf::loadView('historiales.pdf', compact('historial'));
+
+        return $pdf->download('historial_'.$historial->id.'.pdf');
     }
 }

@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
-use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Utils\LogHelper;
 use Illuminate\Http\Request;
 use App\Models\Libro;
+use App\Models\Archivo;
 use App\Models\Historial;
 use Carbon\Carbon;
 
@@ -66,44 +62,61 @@ class LibroController extends Controller
         return view('libros.create');
     }
 
-    // Almacena un nuevo libro y redirige a la vista de crear historial
-    public function store(Request $request)
-    {
-        $request->validate([
-            'titulo' => 'required|string|max:30',
-            'autor' => 'required|string|max:20',
-            'ISBN' => 'required|string|unique:libros,ISBN|between:10,13',
-            'editorial' => 'required|string|max:20',
-            'anio_publicacion' => 'nullable|numeric|between:1901,2155',
-            'genero' => 'required|string',
-            'num_paginas' => 'required|numeric|min:1|max:600',
-            'idioma' => 'nullable|string|max:10',
-            'descripcion' => 'nullable|string|max:150',
-        ]);
-    
-        DB::beginTransaction();
-    
-        try {
-            // Crear un registro de libro
-            $libro = Libro::create($request->all());
-    
-            // Crear un registro en el historial con la acción de agregar
-            Historial::create([
-                'libro_id' => $libro->id,
-                'accion' => 'agregar',
-                'descripcion' => 'Agregado nuevo libro: ' . $libro->titulo,
+        // Almacena un nuevo libro y redirige a la vista de crear historial
+        public function store(Request $request)
+        {
+            $request->validate([
+                'titulo' => 'required|string|max:30',
+                'autor' => 'required|string|max:20',
+                'ISBN' => 'required|string|unique:libros,ISBN|between:10,13',
+                'editorial' => 'required|string|max:20',
+                'anio_publicacion' => 'nullable|numeric|between:1901,2155',
+                'genero' => 'required|string',
+                'num_paginas' => 'required|numeric|min:1|max:600',
+                'idioma' => 'nullable|string|max:10',
+                'descripcion' => 'nullable|string|max:150',
+                'pdf' => 'required|file|mimes:pdf|max:5120',
+                'img' => 'required|file|mimes:jpeg,png,jpg,gif|max:5120',
             ]);
-    
-            DB::commit();
-    
-            // Redireccionar a la vista principal
-            return redirect()->route('main')->with('msn_success', 'Libro creado correctamente');
-        } catch (\Exception $e) {
-            LogHelper::logError($this, $e);
-            DB::rollBack();
-            return redirect()->back()->with('msn_error', 'Fallo la creación del libro: ' . $e->getMessage());
+        
+            DB::beginTransaction();
+        
+            try {
+                // dd($request->all());
+                // Crear un registro de libro
+                $libro = Libro::create($request->except(['pdf', 'img']));
+                // dd($libro);
+                // Cargar y convertir archivos a binarios
+                $pdf = file_get_contents($request->file('pdf')->getRealPath());
+                // dd($pdf);
+                $img = file_get_contents($request->file('img')->getRealPath());
+                // dd($img);
+                // dd(['pdfPath' => $pdf, 'imgPath' => $img]);
+                // Crear un registro de archivo asociado con el libro
+                Archivo::create([
+                    'libro_id' => $libro->id,
+                    'imagen_path' => $img,
+                    'pdf_path' => $pdf,
+                ]);
+                // dd('archivo creado');
+                // Crear un registro en el historial con la acción de agregar
+                Historial::create([
+                    'libro_id' => $libro->id,
+                    'accion' => 'agregar',
+                    'descripcion' => 'Agregado nuevo libro: ' . $libro->titulo,
+                ]);
+                // dd('Historial creado');
+                DB::commit();
+        
+                // Redireccionar a la vista principal
+                return redirect()->route('main')->with('msn_success', 'Libro creado correctamente');
+            } catch (\Exception $e) {
+                LogHelper::logError($this, $e);
+                dd('mensaje de error'.$e);
+                DB::rollBack();
+                return redirect()->back()->with('msn_error', 'Fallo la creación del libro: ' . $e->getMessage());
+            }
         }
-    }
 
     // Muestra los detalles de un libro específico
     public function show($id)

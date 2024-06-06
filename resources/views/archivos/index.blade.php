@@ -8,8 +8,8 @@
             @if($libro->archivo)
                 <div class="col-md-4 book-card">
                     <div class="card">
-                        <a href="{{ asset('storage/' . $libro->archivo->pdf_path) }}" target="_blank">
-                            <img src="{{ asset('storage/' . $libro->archivo->imagen_path) }}" alt="{{ $libro->titulo }}" class="card-img-top book-image">
+                        <a href="{{ route('libros.pdf', $libro->id) }}" target="_blank">
+                            <img src="{{ $libro->archivo->imagen_path }}" alt="{{ "Imagen del libro" }}" class="card-img-top book-image">
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ $libro->titulo }}</h5>

@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('genero');
             $table->integer('num_paginas');
             $table->string('idioma');
-            $table->binary('pdf');
-            $table->binary('img');
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

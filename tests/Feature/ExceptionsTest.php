@@ -13,7 +13,20 @@ class ExceptionsTest extends TestCase
 
     public function test_historial_store_exception(): void
     {
-        $libro = Libro::factory()->create();
+        $libro = Libro::create(
+            [
+                    'titulo' => 'Ad enim eveniet est qui.',
+        'autor' => 'Clair Frami',
+        'ISBN' => '9791136608222',
+        'editorial' => 'Grant, Dibbert', // Campo acortado
+        'anio_publicacion' => '1985',
+        'genero' => 'id',
+        'num_paginas' => 897,
+        'idioma' => 'id',
+        'descripcion' => 'Quo qui optio pariatur qui ea occaecati sit. Itaque libero officia provident mollitia corrupti.',
+                 
+            ]
+        );
 
         $historialData = [
             'libro_id' => $libro->id,

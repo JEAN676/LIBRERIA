@@ -16,7 +16,14 @@
       </div>
       <ul class="nav-list">
         <li>
-          <form method="GET" action="{{ Route::currentRouteName() == 'libros.index' ? route('libros.index') : route('historiales.index') }}" style="display: flex; align-items: center;">
+          <form method="GET" action=
+          "{{ 
+            Route::currentRouteName() == 'libros.index' ? route('libros.index') : 
+            (Route::currentRouteName() == 'historiales.index' ? route('historiales.index') : 
+            route('archivos.index')) 
+          }}"
+          {{-- "{{ Route::currentRouteName() == 'libros.index' ? route('libros.index') : route('historiales.index') }}" --}}
+           style="display: flex; align-items: center;">
             <i class="bx bx-search"></i>
             <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
             <span class="tooltip">Search</span>
